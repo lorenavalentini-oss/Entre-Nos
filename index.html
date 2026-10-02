@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ENTRE NOSOTROS · Experiencia de equipo</title>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<style>
+:root{--ink:#18313b;--muted:#6c7c82;--paper:#f6f2ea;--card:#fffdf8;--accent:#3d756b;--line:#d9ded9;--warm:#b97855}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(135deg,#eef3ef,#f8f2e8);color:var(--ink);min-height:100vh}
+.wrap{max-width:920px;margin:auto;padding:22px}.top{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:16px}
+.brand{font-size:.82rem;letter-spacing:.18em;font-weight:800}.progress{height:8px;background:#dfe6e2;border-radius:99px;overflow:hidden;flex:1;max-width:420px}.bar{height:100%;width:0;background:var(--accent);transition:.4s}
+.screen{display:none;background:rgba(255,253,248,.94);border:1px solid rgba(24,49,59,.1);border-radius:26px;padding:clamp(24px,5vw,56px);box-shadow:0 22px 60px rgba(33,54,49,.09);min-height:610px}.screen.active{display:block;animation:up .4s ease}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.kicker{font-size:.78rem;letter-spacing:.17em;text-transform:uppercase;color:var(--accent);font-weight:800}h1{font-size:clamp(2.3rem,7vw,5.6rem);line-height:.92;margin:.2em 0}h2{font-size:clamp(1.7rem,4vw,3rem);margin:.35em 0}.lead{font-size:1.18rem;line-height:1.65;max-width:700px;color:#42575d}
+button{font:inherit}.btn{border:0;background:var(--ink);color:white;padding:14px 22px;border-radius:99px;font-weight:800;cursor:pointer;margin-top:20px}.btn.secondary{background:transparent;color:var(--ink);border:1px solid var(--line)}.nav{display:flex;justify-content:space-between;gap:10px;margin-top:28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0}.choice{border:1px solid var(--line);background:white;border-radius:17px;padding:16px;cursor:pointer;min-height:58px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;transition:.2s}.choice:hover,.choice.sel{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 8px 24px rgba(61,117,107,.13);background:#edf5f1}
+.colors{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:28px 0}.color{aspect-ratio:1;border-radius:50%;border:5px solid white;box-shadow:0 5px 18px #0002;cursor:pointer;transition:.2s}.color.sel{outline:4px solid var(--ink);transform:scale(.93)}
+input,textarea{width:100%;padding:15px 17px;border:1px solid var(--line);border-radius:14px;background:white;font:inherit;color:var(--ink)}textarea{min-height:100px;resize:vertical}.field{margin:18px 0}.field label{display:block;font-weight:800;margin-bottom:8px}
+.deck{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:25px 0}.card{height:190px;perspective:900px;cursor:pointer}.inner{width:100%;height:100%;position:relative;transition:.6s;transform-style:preserve-3d}.card.open .inner{transform:rotateY(180deg)}.face{position:absolute;inset:0;border-radius:18px;display:flex;align-items:center;justify-content:center;padding:16px;text-align:center;backface-visibility:hidden}.back{background:var(--ink);color:#dfe9e4;font-size:2.5rem}.front{background:#f0e8da;border:1px solid #d7c8b5;transform:rotateY(180deg);font-weight:900;letter-spacing:.08em}
+.rolebox{padding:14px;border:1px dashed var(--accent);border-radius:14px;margin:10px 0;background:#f5faf7}.small{font-size:.9rem;color:var(--muted)}.scale{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.scale .choice{font-size:.78rem;padding:10px 6px;min-height:48px}
+.canvasWrap{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:white}canvas{display:block;width:100%;height:320px;touch-action:none}.tools{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}.dot{width:34px;height:34px;border-radius:50%;border:3px solid white;box-shadow:0 0 0 1px #bbb;cursor:pointer}
+.result{background:#17323b;color:white;border-radius:24px;padding:30px;margin-top:20px}.result .big{font-size:2rem;font-weight:900}.pill{display:inline-block;background:#ffffff18;padding:8px 12px;border-radius:99px;margin:5px}
+.notice{padding:14px 16px;border-radius:14px;background:#eef4f1;border-left:4px solid var(--accent);font-size:.93rem;line-height:1.5}.error{color:#9a4036;font-weight:700;min-height:24px}
+@media(max-width:620px){.screen{min-height:auto}.deck{grid-template-columns:1fr}.card{height:125px}.colors{grid-template-columns:repeat(4,1fr);gap:10px}.top{align-items:flex-start;flex-direction:column}.progress{width:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div class="brand">ENTRE NOSOTROS</div><div class="progress"><div class="bar" id="bar"></div></div><div class="small" id="count">Inicio</div></div>
+
+  <section class="screen active" data-step="0">
+    <div class="kicker">Experiencia de equipo</div>
+    <h1>ENTRE<br>NOSOTROS</h1>
+    <p class="lead">Todos los días acompañamos procesos de cambio. Hoy la propuesta es hacer una pausa y observar cómo estamos llegando, qué necesitamos y qué podemos aportar.</p>
+    <div class="notice">No hay respuestas correctas. No es una evaluación de desempeño ni un diagnóstico. La experiencia propone observar, elegir y conversar.</div>
+    <div class="field"><label>Elegí un código para identificar tu recorrido</label><input id="code" placeholder="Ej.: LUNA27" maxlength="18"><div class="small">No hace falta usar tu nombre.</div></div>
+    <button class="btn" onclick="next()">Comenzar</button>
+  </section>
+
+  <section class="screen" data-step="1">
+    <div class="kicker">Estación 1 · Llegar</div><h2>¿Con qué color llegaste hoy?</h2>
+    <p class="lead">No busques explicarlo todavía. Elegí el que más se acerque a cómo estás.</p>
+    <div class="colors" id="colors"></div>
+    <div class="field"><label>Ahora sí: ¿qué significa ese color para vos?</label><input id="colorMeaning" placeholder="Una palabra o una frase breve"></div>
+    <div class="error" id="e1"></div><div class="nav"><button class="btn secondary" onclick="prev()">Volver</button><button class="btn" onclick="next()">Continuar</button></div>
+  </section>
+
+  <section class="screen" data-step="2">
+    <div class="kicker">Estación 2 · El espejo</div><h2>Lo que se ve. Lo que no siempre se ve.</h2>
+    <p class="lead">Elegí hasta tres palabras que podrían usar tus compañeros para describirte trabajando.</p>
+    <div class="grid multi" id="visible"></div>
+    <p class="lead">Ahora elegí hasta dos cosas tuyas que probablemente se vean menos.</p>
+    <div class="grid multi" id="hidden"></div>
+    <div class="error" id="e2"></div><div class="nav"><button class="btn secondary" onclick="prev()">Volver</button><button class="btn" onclick="next()">Continuar</button></div>
+  </section>
+
+  <section class="screen" data-step="3">
+    <div class="kicker">Estación 3 · Las cartas</div><h2>Elegí tres cartas</h2>
+    <p class="lead">No sabés qué hay detrás. Abrí tres y dejá que las palabras hagan el resto.</p>
+    <div class="deck" id="deck"></div>
+    <div id="roles" style="display:none">
+      <div class="rolebox"><b>TRAIGO</b><div class="small">¿Cuál de tus tres palabras sentís que ya aportás?</div><div class="grid role" data-role="Traigo"></div></div>
+      <div class="rolebox"><b>NECESITO</b><div class="small">¿Cuál sentís que hoy necesitás?</div><div class="grid role" data-role="Necesito"></div></div>
+      <div class="rolebox"><b>PUEDO OFRECER MÁS</b><div class="small">¿Cuál podrías poner más en juego?</div><div class="grid role" data-role="Puedo ofrecer"></div></div>
+    </div>
+    <div class="error" id="e3"></div><div class="nav"><button class="btn secondary" onclick="prev()">Volver</button><button class="btn" onclick="next()">Continuar</button></div>
+  </section>
+
+  <section class="screen" data-step="4">
+    <div class="kicker">Estación 4 · Un día difícil</div><h2>¿Qué hace la diferencia?</h2>
+    <p class="lead">Pensá en uno de esos días de mucho trabajo. Elegí hasta tres gestos que para vos cambian el clima.</p>
+    <div class="grid multi" id="difference"></div>
+    <div class="error" id="e4"></div><div class="nav"><button class="btn secondary" onclick="prev()">Volver</button><button class="btn" onclick="next()">Continuar</button></div>
+  </section>
+
+  <section class="screen" data-step="5">
+    <div class="kicker">Estación 5 · El observador</div><h2>Una misma escena puede tener más de una mirada</h2>
+    <p class="lead">Pensá en una situación de trabajo que te haya generado tensión. No pongas nombres.</p>
+    <div class="field"><label>¿Qué pasó, contado solamente con hechos observables?</label><textarea id="facts" placeholder="Lo que una cámara podría haber registrado"></textarea></div>
+    <div class="field"><label>¿Qué interpretación hiciste vos en ese momento?</label><textarea id="interpretation" placeholder="Lo que pensaste o asumiste"></textarea></div>
+    <div class="field"><label>Si hubiera otra explicación posible, ¿cuál podría ser?</label><textarea id="alternative" placeholder="Probá una mirada diferente"></textarea></div>
+    <div class="nav"><button class="btn secondary" onclick="prev()">Volver</button><button class="btn" onclick="next()">Continuar</button></div>
+  </section>
+
+  <section class="screen" data-step="6">
+    <div class="kicker">Estación 6 · Conversaciones</div><h2>Lo que decimos cambia lo que podemos construir</h2>
+    <div class="field"><label>Algo de este equipo que agradezco</label><textarea id="thanks"></textarea></div>
+    <div class="field"><label>Algo que necesito poder pedir con mayor claridad</label><textarea id="need"></textarea></div>
+    <div class="field"><label>Algo que yo podría hacer mejor</label><textarea id="better"></textarea></div>
+    <div class="field"><label>Una conversación que ayudaría al equipo</label><textarea id="conversation" placeholder="Sin nombres: describí de qué habría que poder hablar"></textarea></div>
+    <div class="nav"><button class="btn secondary" onclick="prev()">Volver</button><button class="btn" onclick="next()">Continuar</button></div>
+  </section>
+
+  <section class="screen" data-step="7">
+    <div class="kicker">Estación 7 · Futuro</div><h2>Mañana algo cambió</h2>
+    <p class="lead">Llegás a trabajar y, sin saber exactamente por qué, sentís que el equipo funciona mejor. ¿Qué sería lo primero que notarías?</p>
+    <div class="grid" id="future"></div>
+    <div class="field"><label>Una palabra que te gustaría que definiera al equipo</label><input id="teamWord"></div>
+    <div class="field"><label>Una persona nueva llega y dice: “Lo que más me gusta de este equipo es…”</label><input id="newPerson" placeholder="Completá la frase"></div>
+    <div class="nav"><button class="btn secondary" onclick="prev()">Volver</button><button class="btn" onclick="next()">Continuar</button></div>
+  </section>
+
+  <section class="screen" data-step="8">
+    <div class="kicker">Estación final · Retrato</div><h2>Dibujá cómo te gustaría sentirte trabajando acá</h2>
+    <p class="lead">No tiene que ser lindo ni representar nada concreto. Puede ser un color, una forma, una palabra o un garabato.</p>
+    <div class="tools">
+      <div class="dot" style="background:#18313b" onclick="pen='#18313b'"></div><div class="dot" style="background:#3d756b" onclick="pen='#3d756b'"></div>
+      <div class="dot" style="background:#c79a45" onclick="pen='#c79a45'"></div><div class="dot" style="background:#b97855" onclick="pen='#b97855'"></div>
+      <div class="dot" style="background:#6e78a6" onclick="pen='#6e78a6'"></div><button class="btn secondary" style="margin:0" onclick="clearCanvas()">Borrar</button>
+    </div>
+    <div class="canvasWrap"><canvas id="canvas"></canvas></div>
+    <div class="field"><label>Mirando tu dibujo, ¿qué palabra aparece?</label><input id="portraitWord"></div>
+    <div class="field"><label>¿Qué pequeña acción depende de vos para acercarnos a ese equipo?</label><textarea id="commitment"></textarea></div>
+    <div class="nav"><button class="btn secondary" onclick="prev()">Volver</button><button class="btn" onclick="finish()">Ver mi tarjeta</button></div>
+  </section>
+
+  <section class="screen" data-step="9">
+    <div class="kicker">Tu cierre</div><h2>Esto apareció en tu recorrido</h2>
+    <div class="result" id="result"></div>
+    <p class="lead">No es un diagnóstico. Es una fotografía de este momento y un punto de partida para conversar.</p>
+    <button class="btn" onclick="prepareCoachEmail()">Enviar recorrido al Coach</button>
+    <button class="btn secondary" onclick="downloadExcel()">Descargar Excel</button>
+    <button class="btn secondary" onclick="downloadCard()">Guardar mi tarjeta como imagen</button>
+    <div class="notice" style="margin-top:18px"><b>Importante:</b> al tocar “Enviar recorrido al Coach” se descarga tu Excel y se abre un correo dirigido a <b>valentini.lorena@bue.edu.ar</b>. Por seguridad del navegador, deberás adjuntar el Excel descargado antes de enviar el mensaje.</div>
+  </section>
+</div>
+
+<script>
+const S={step:0,color:'',visible:[],hidden:[],cards:[],roles:{},difference:[],future:''};
+const colors=[['Azul','#4f79a8'],['Verde','#668d6c'],['Amarillo','#d5ad45'],['Naranja','#c97845'],['Rojo','#a94f4c'],['Violeta','#79658e'],['Negro','#2f3436'],['Gris','#8d9698']];
+const visible=['Resolutivo/a','Tranquilo/a','Exigente','Disponible','Rápido/a','Cuidadoso/a','Organizado/a','Fuerte','Divertido/a','Responsable','Directo/a','Paciente'];
+const hidden=['Cansancio','Preocupación','Inseguridad','Necesidad de ayuda','Sensibilidad','Enojo','Miedo a equivocarme','Necesidad de ser escuchado/a','Ganas de ser reconocido/a','Necesidad de espacio'];
+const cardWords=['CONFIANZA','ESCUCHA','RESPETO','RECONOCIMIENTO','HUMOR','PACIENCIA','AYUDA','CLARIDAD','ESPACIO','CUIDADO','LÍMITES','PERTENENCIA','CALMA','VALENTÍA','GRATITUD','CAMBIO','COMPAÑERISMO','PRESENCIA'];
+const diffs=['Que me pregunten si necesito ayuda','Que confíen en mi criterio','Que me hablen con respeto aunque no estemos de acuerdo','Que reconozcan lo que hice','Poder decir que algo salió mal sin buscar culpables','Que no supongan lo que estoy pensando','Poder pedir ayuda','Poder decir me equivoqué','Que haya un poco de humor','Que alguien simplemente escuche','Que respetemos nuestros límites','Poder hablar directamente cuando algo molesta'];
+const futures=['Nos hablamos de otra manera','Nos escuchamos más','Nos ayudamos sin esperar','Hay menos comentarios por detrás','Podemos equivocarnos sin atacarnos','Reconocemos más lo que hacemos bien','Podemos disentir y seguir trabajando juntos','Hay más confianza','Hay más humor','Hay menos tensión','Podemos decir lo que necesitamos','Volvemos a sentirnos equipo'];
+
+function renderChoices(id,arr,key,max=99){
+ const el=document.getElementById(id); el.innerHTML='';
+ arr.forEach(x=>{let b=document.createElement('button');b.className='choice';b.textContent=x;b.onclick=()=>{
+   let a=S[key]; if(a.includes(x)){S[key]=a.filter(v=>v!==x);b.classList.remove('sel')}
+   else if(a.length<max){S[key].push(x);b.classList.add('sel')}
+ };el.appendChild(b)})
+}
+colors.forEach(([n,c])=>{let d=document.createElement('button');d.className='color';d.title=n;d.style.background=c;d.onclick=()=>{S.color=n;document.querySelectorAll('.color').forEach(x=>x.classList.remove('sel'));d.classList.add('sel')};document.getElementById('colors').appendChild(d)});
+renderChoices('visible',visible,'visible',3); renderChoices('hidden',hidden,'hidden',2); renderChoices('difference',diffs,'difference',3);
+futures.forEach(x=>{let b=document.createElement('button');b.className='choice';b.textContent=x;b.onclick=()=>{S.future=x;document.querySelectorAll('#future .choice').forEach(z=>z.classList.remove('sel'));b.classList.add('sel')};document.getElementById('future').appendChild(b)});
+
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+const deckWords=shuffle(cardWords).slice(0,6);
+deckWords.forEach((w,i)=>{let c=document.createElement('div');c.className='card';c.innerHTML=`<div class="inner"><div class="face back">✦</div><div class="face front">${w}</div></div>`;c.onclick=()=>{
+ if(c.classList.contains('open'))return;
+ if(S.cards.length>=3)return;
+ c.classList.add('open');S.cards.push(w);
+ if(S.cards.length===3) showRoles();
+};document.getElementById('deck').appendChild(c)});
+function showRoles(){document.getElementById('roles').style.display='block';document.querySelectorAll('.role').forEach(box=>{box.innerHTML='';let role=box.dataset.role;S.cards.forEach(w=>{let b=document.createElement('button');b.className='choice';b.textContent=w;b.onclick=()=>{S.roles[role]=w;box.querySelectorAll('.choice').forEach(x=>x.classList.remove('sel'));b.classList.add('sel')};box.appendChild(b)})})}
+
+function next(){
+ if(S.step===0 && !document.getElementById('code').value.trim()){alert('Elegí un código para tu recorrido.');return}
+ if(S.step===1 && !S.color){document.getElementById('e1').textContent='Elegí un color para continuar.';return}
+ if(S.step===2 && (!S.visible.length||!S.hidden.length)){document.getElementById('e2').textContent='Elegí al menos una opción en cada grupo.';return}
+ if(S.step===3 && (S.cards.length<3||Object.keys(S.roles).length<3)){document.getElementById('e3').textContent='Abrí tres cartas y asigná una a cada lugar.';return}
+ if(S.step===4 && !S.difference.length){document.getElementById('e4').textContent='Elegí al menos una opción.';return}
+ go(S.step+1)
+}
+function prev(){go(Math.max(0,S.step-1))}
+function go(n){document.querySelector(`[data-step="${S.step}"]`).classList.remove('active');S.step=n;document.querySelector(`[data-step="${S.step}"]`).classList.add('active');document.getElementById('bar').style.width=(Math.min(S.step,9)/9*100)+'%';document.getElementById('count').textContent=S.step===0?'Inicio':S.step===9?'Cierre':`${S.step} / 8`;window.scrollTo({top:0,behavior:'smooth'});if(S.step===8)setTimeout(sizeCanvas,80)}
+
+const canvas=document.getElementById('canvas');let ctx=canvas.getContext('2d'),pen='#18313b',drawing=false,canvasReady=false;
+function sizeCanvas(){
+  const r=canvas.getBoundingClientRect();
+  if(!r.width) return;
+  const ratio=window.devicePixelRatio||1;
+  canvas.width=Math.round(r.width*ratio);
+  canvas.height=Math.round(320*ratio);
+  canvas.style.height='320px';
+  ctx=canvas.getContext('2d');
+  ctx.setTransform(ratio,0,0,ratio,0,0);
+  ctx.lineWidth=4;ctx.lineCap='round';ctx.lineJoin='round';
+  canvasReady=true;
+}
+function point(e){const r=canvas.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top]}
+canvas.addEventListener('pointerdown',e=>{if(!canvasReady)sizeCanvas();drawing=true;canvas.setPointerCapture(e.pointerId);const [x,y]=point(e);ctx.beginPath();ctx.moveTo(x,y);e.preventDefault()});
+canvas.addEventListener('pointermove',e=>{if(!drawing)return;const [x,y]=point(e);ctx.strokeStyle=pen;ctx.lineTo(x,y);ctx.stroke();e.preventDefault()});
+canvas.addEventListener('pointerup',e=>{drawing=false;try{canvas.releasePointerCapture(e.pointerId)}catch(_){}});
+canvas.addEventListener('pointercancel',()=>drawing=false);
+function clearCanvas(){if(!canvasReady)sizeCanvas();ctx.clearRect(0,0,canvas.width,canvas.height)}
+
+function val(id){return document.getElementById(id).value.trim()}
+function collect(){return {
+ 'Código':val('code'),'Fecha':new Date().toLocaleString(),'Color de llegada':S.color,'Significado del color':val('colorMeaning'),
+ 'Cómo creo que me ven':S.visible.join(' | '),'Lo que se ve menos':S.hidden.join(' | '),
+ 'Cartas elegidas':S.cards.join(' | '),'Traigo':S.roles['Traigo']||'','Necesito':S.roles['Necesito']||'','Puedo ofrecer más':S.roles['Puedo ofrecer']||'',
+ 'Qué hace la diferencia':S.difference.join(' | '),'Hechos observables':val('facts'),'Mi interpretación':val('interpretation'),'Otra explicación posible':val('alternative'),
+ 'Algo que agradezco':val('thanks'),'Algo que necesito pedir':val('need'),'Algo que puedo hacer mejor':val('better'),'Conversación que ayudaría':val('conversation'),
+ 'Primer cambio que notaría':S.future,'Palabra para el equipo':val('teamWord'),'Lo que quisiera que diga alguien nuevo':val('newPerson'),
+ 'Palabra del retrato':val('portraitWord'),'Mi pequeño compromiso':val('commitment')
+}}
+function finish(){let d=collect();document.getElementById('result').innerHTML=`<div class="small">HOY LLEGUÉ CON</div><div class="big">${d['Color de llegada']||'—'}</div><hr style="border-color:#ffffff22"><span class="pill">TRAIGO · ${d.Traigo||'—'}</span><span class="pill">NECESITO · ${d.Necesito||'—'}</span><span class="pill">PUEDO OFRECER · ${d['Puedo ofrecer más']||'—'}</span><p><b>Me gustaría que nos definiera:</b><br>${d['Palabra para el equipo']||'—'}</p><p><b>Mi movimiento:</b><br>${d['Mi pequeño compromiso']||'—'}</p>`;go(9)}
+
+function downloadExcel(){
+ const d=collect(), rows=Object.entries(d).map(([Pregunta,Respuesta])=>({Pregunta,Respuesta}));
+ const wb=XLSX.utils.book_new(), ws=XLSX.utils.json_to_sheet(rows);ws['!cols']=[{wch:34},{wch:90}];XLSX.utils.book_append_sheet(wb,ws,'Recorrido');
+ const summary=[{Codigo:d['Código'],Color:d['Color de llegada'],Traigo:d.Traigo,Necesito:d.Necesito,Puedo_ofrecer:d['Puedo ofrecer más'],Palabra_equipo:d['Palabra para el equipo'],Compromiso:d['Mi pequeño compromiso']}];
+ const ws2=XLSX.utils.json_to_sheet(summary);ws2['!cols']=Object.keys(summary[0]).map(()=>({wch:24}));XLSX.utils.book_append_sheet(wb,ws2,'Resumen');
+ XLSX.writeFile(wb,`Entre_Nosotros_${(d['Código']||'anonimo').replace(/\W/g,'_')}.xlsx`);
+}
+function prepareCoachEmail(){
+ const d=collect();
+ downloadExcel();
+ const subject=encodeURIComponent(`ENTRE NOSOTROS · ${d['Código']||'Participante'}`);
+ const body=encodeURIComponent(
+`Hola,
+
+Adjunto mi recorrido de la experiencia ENTRE NOSOTROS.
+
+Código: ${d['Código']||'Anónimo'}
+
+Este archivo contiene mis respuestas para la intervención de coaching de equipo.
+
+Gracias.`
+ );
+ setTimeout(()=>{window.location.href=`mailto:valentini.lorena@bue.edu.ar?subject=${subject}&body=${body}`},500);
+}
+function downloadCard(){
+ const d=collect(),c=document.createElement('canvas');c.width=1200;c.height=1500;let x=c.getContext('2d');x.fillStyle='#f6f2ea';x.fillRect(0,0,c.width,c.height);x.fillStyle='#18313b';x.font='bold 38px sans-serif';x.fillText('ENTRE NOSOTROS',80,100);x.font='bold 82px sans-serif';x.fillText(d['Color de llegada']||'HOY',80,230);x.font='32px sans-serif';
+ const lines=[`TRAIGO  ${d.Traigo||'—'}`,`NECESITO  ${d.Necesito||'—'}`,`PUEDO OFRECER  ${d['Puedo ofrecer más']||'—'}`,`ME GUSTARÍA QUE NOS DEFINIERA`,d['Palabra para el equipo']||'—',`MI MOVIMIENTO`,d['Mi pequeño compromiso']||'—'];
+ let y=390;lines.forEach((t,i)=>{x.font=(i===3||i===5)?'bold 25px sans-serif':'32px sans-serif';wrap(x,t,80,y,1030,46);y+=i===6?180:100});
+ let a=document.createElement('a');a.download=`Tarjeta_${d['Código']||'anonimo'}.png`;a.href=c.toDataURL('image/png');a.click()
+}
+function wrap(ctx,text,x,y,max,l){let words=text.split(' '),line='';for(let w of words){let test=line+w+' ';if(ctx.measureText(test).width>max){ctx.fillText(line,x,y);line=w+' ';y+=l}else line=test}ctx.fillText(line,x,y)}
+</script>
+</body>
+</html>
